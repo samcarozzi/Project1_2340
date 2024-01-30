@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/assignmentStore"
-        android:name="com.example.project1.ui.gallery.GalleryFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.example.project1.ui.assignment.AssignmentFragment"
+        android:label="@string/menu_assignmentStore"
+        tools:layout="@layout/fragment_assignment" />
     <fragment
         android:id="@+id/examStore"
         android:name="com.example.project1.ui.exam.ExamFragment"
