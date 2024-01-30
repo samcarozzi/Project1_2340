@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/classStore"
-        android:name="com.example.project1.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.example.project1.ui.classStore.ClassStoreFragment"
+        android:label="@string/menu_classStore"
+        tools:layout="@layout/fragment_class_store" />
 
     <fragment
         android:id="@+id/assignmentStore"
