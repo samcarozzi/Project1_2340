@@ -24,12 +24,8 @@
         tools:layout="@layout/fragment_gallery" />
     <fragment
         android:id="@+id/examStore"
-        android:name="com.example.project1.ui.gallery.GalleryFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_gallery" />
-    <fragment
-        android:id="@+id/todoStore"
-        android:name="com.example.project1.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.project1.ui.exam.ExamFragment"
+        android:label="@string/menu_examStore"
+        tools:layout="@layout/fragment_exam"
+        />
 </navigation>
