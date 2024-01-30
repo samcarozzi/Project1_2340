@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.project1.databinding.FragmentAssignmentBinding;
-import com.example.project1.ui.assignment.AssignmentFragmentViewModel;
 
 public class AssignmentFragment extends Fragment {
 
