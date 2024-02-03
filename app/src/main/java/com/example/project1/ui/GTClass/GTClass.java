@@ -1,4 +1,4 @@
-package com.example.project1;
+package com.example.project1.ui.GTClass;
 
 public class GTClass {
     String courseName;
