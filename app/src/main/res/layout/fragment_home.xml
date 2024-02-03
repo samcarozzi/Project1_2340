@@ -59,7 +59,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ahhhhh"
+            android:hint="ahh7809hhh"
             android:inputType="textCapWords"
             android:maxLength="255" />
     </com.google.android.material.textfield.TextInputLayout>

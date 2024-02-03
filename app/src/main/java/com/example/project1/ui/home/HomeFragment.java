@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.project1.databinding.FragmentHomeBinding;
@@ -33,12 +35,16 @@ public class HomeFragment extends Fragment {
 
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                TextInputLayout textInputLayout = view.findViewById(R.id.input);
+            public void onClick(View v) { // Changed 'view' to 'v' to avoid confusion with the outer 'view'
+                TextInputLayout textInputLayout = binding.input; // Directly access via binding
                 if (textInputLayout != null && textInputLayout.getEditText() != null) {
                     String text = textInputLayout.getEditText().getText().toString();
-                    homeViewModel.addInput(text);
-                    Toast.makeText(getActivity(), "Input saved", Toast.LENGTH_SHORT).show();
+                    if (!text.trim().isEmpty()) { // Check if the text is not just whitespace
+                        homeViewModel.addInput(text);
+                        Toast.makeText(getActivity(), "Input saved", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Input is empty", Toast.LENGTH_SHORT).show(); // Optionally notify the user
+                    }
                 }
             }
         });

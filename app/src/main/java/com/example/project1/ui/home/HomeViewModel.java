@@ -27,10 +27,6 @@ public class HomeViewModel extends ViewModel {
         return mText;
     }
 
-    public LiveData<String> getText2() {
-        return mText2;
-    }
-
     public LiveData<String> getInputListText() {
         return inputListText;
     }
