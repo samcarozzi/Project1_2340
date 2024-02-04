@@ -1,9 +1,8 @@
-package com.example.project1;
+package com.example.project1.ui.GTAssignment;
 
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Assignment {
     private String title;
