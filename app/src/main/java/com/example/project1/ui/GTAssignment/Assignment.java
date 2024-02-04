@@ -10,10 +10,14 @@ public class Assignment {
     private Date dateDue;
     private String courseName;
 
+    public static ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+
     public Assignment(String title, Date dateDue, String courseName) {
         this.title = title;
         this.dateDue = dateDue;
         this.courseName = courseName;
+
+        assignments.add(this);
 
     }
 
@@ -51,7 +55,7 @@ public class Assignment {
     }
 
     //hdfsdf
-    public void sortDueDates(ArrayList<Assignment> assignments) {
+    public void sortDueDates() {
 
         Collections.sort(assignments, (a1, a2) -> a1.getDateDue().compareTo(a2.getDateDue()));
     }
