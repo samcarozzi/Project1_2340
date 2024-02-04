@@ -7,14 +7,12 @@ public class Assignment {
     private Date dateDue;
     private String courseName; 
 
-    // Constructor
     public Assignment(String title, Date dateDue, String courseName) {
         this.title = title;
         this.dateDue = dateDue;
         this.courseName = courseName;
     }
 
-    // Getters and Setters
     public String getTitle() {
         return title;
     }
@@ -23,11 +21,11 @@ public class Assignment {
         this.title = title;
     }
 
-    public Date getdateDue() {
+    public Date getDateDue() {
         return dateDue;
     }
 
-    public void setdateDue(Date dateDue) {
+    public void setDateDue(Date dateDue) {
         this.dateDue = dateDue;
     }
 
@@ -39,7 +37,6 @@ public class Assignment {
         this.courseName = courseName;
     }
 
-    // Optionally, override toString() for easy printing/debugging
     @Override
     public String toString() {
         return "Assignment{" +
