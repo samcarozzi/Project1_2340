@@ -1,16 +1,24 @@
 package com.example.project1;
 
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Assignment {
     private String title;
     private Date dateDue;
-    private String courseName; 
+    private String courseName;
+
+    public static ArrayList<Assignment> assignments = new ArrayList<Assignment>();
 
     public Assignment(String title, Date dateDue, String courseName) {
         this.title = title;
         this.dateDue = dateDue;
         this.courseName = courseName;
+
+        assignments.add(this);
+
     }
 
     public String getTitle() {
@@ -45,5 +53,10 @@ public class Assignment {
                 ", courseName='" + courseName + '\'' +
                 '}';
     }
+
+    public void sortDueDates() {
+        Collections.sort(assignments, (a1, a2) -> a1.getDateDue().compareTo(a2.getDateDue()));
+    }
+
 }
 
