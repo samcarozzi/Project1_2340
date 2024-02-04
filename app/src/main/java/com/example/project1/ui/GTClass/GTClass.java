@@ -1,6 +1,10 @@
 package com.example.project1.ui.GTClass;
 
+import java.util.ArrayList;
+
 public class GTClass {
+
+    public static ArrayList<GTClass> classList = new ArrayList<>();
     String courseName;
     String time;
     String instructor;
@@ -9,6 +13,8 @@ public class GTClass {
         this.courseName = courseName;
         this.time = time;
         this.instructor = instructor;
+
+        classList.add(this);
     }
 
     public GTClass() {
@@ -51,9 +57,19 @@ public class GTClass {
         return time;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof GTClass)) return false;
+        GTClass o = (GTClass) obj;
+        return o.courseName.equals(this.courseName);
+    }
 
-
-
-
-
+    public void removeClass() {
+        if (classList.size() == 0) {
+            return;
+        }
+        classList.remove(this);
+    }
 }
