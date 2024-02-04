@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Assignment {
     private String title;
-    private Date dueDate;
-    private String associatedClass; // This could be a course name or an identifier
+    private Date dateDue;
+    private String courseName; 
 
     // Constructor
-    public Assignment(String title, Date dueDate, String associatedClass) {
+    public Assignment(String title, Date dateDue, String courseName) {
         this.title = title;
-        this.dueDate = dueDate;
-        this.associatedClass = associatedClass;
+        this.dateDue = dateDue;
+        this.courseName = courseName;
     }
 
     // Getters and Setters
@@ -23,20 +23,20 @@ public class Assignment {
         this.title = title;
     }
 
-    public Date getDueDate() {
-        return dueDate;
+    public Date getdateDue() {
+        return dateDue;
     }
 
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    public void setdateDue(Date dateDue) {
+        this.dateDue = dateDue;
     }
 
-    public String getAssociatedClass() {
-        return associatedClass;
+    public String getcourseName() {
+        return courseName;
     }
 
-    public void setAssociatedClass(String associatedClass) {
-        this.associatedClass = associatedClass;
+    public void setcourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     // Optionally, override toString() for easy printing/debugging
@@ -44,8 +44,8 @@ public class Assignment {
     public String toString() {
         return "Assignment{" +
                 "title='" + title + '\'' +
-                ", dueDate=" + dueDate +
-                ", associatedClass='" + associatedClass + '\'' +
+                ", dateDue=" + dateDue +
+                ", courseName='" + courseName + '\'' +
                 '}';
     }
 }
