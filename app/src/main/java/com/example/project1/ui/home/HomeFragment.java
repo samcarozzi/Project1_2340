@@ -12,8 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.project1.databinding.FragmentHomeBinding;
+import com.example.project1.ui.GTClass.GTClass;
+import com.example.project1.ui.GTClass.GTClassAdapter;
 import com.google.android.material.textfield.TextInputLayout;
 
 import com.example.project1.R;
@@ -23,6 +26,9 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private ArrayList<String> inputList = new ArrayList<>();
+
+    private ArrayList<GTClass> gtClasses = new ArrayList<>();
+
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -56,6 +62,12 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         // Rest of your onCreateView code
+        gtClasses.add(new GTClass("Intro to CS", "10:00 AM - 11:15 AM", "Dr. Smith"));
+        gtClasses.add(new GTClass("Calculus", "1:00 PM - 2:15 PM", "Prof. Johnson"));
+
+        GTClassAdapter adapter = new GTClassAdapter(gtClasses);
+        binding.classesRecyclerView.setAdapter(adapter);
+        binding.classesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return root;
     }
