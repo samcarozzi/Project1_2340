@@ -25,49 +25,33 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private ArrayList<String> inputList = new ArrayList<>();
-
     private ArrayList<GTClass> gtClasses = new ArrayList<>();
 
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
-        // Update the TextView with the list of inputs
-        final TextView inputListTextView = binding.inputListTextView; // assuming this is the ID of your TextView
-        homeViewModel.getInputListText().observe(getViewLifecycleOwner(), inputListTextView::setText);
-
-        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { // Changed 'view' to 'v' to avoid confusion with the outer 'view'
-                TextInputLayout textInputLayout = binding.input; // Directly access via binding
-                if (textInputLayout != null && textInputLayout.getEditText() != null) {
-                    String text = textInputLayout.getEditText().getText().toString();
-                    if (!text.trim().isEmpty()) { // Check if the text is not just whitespace
-                        homeViewModel.addInput(text);
-                        Toast.makeText(getActivity(), "Input saved", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "Input is empty", Toast.LENGTH_SHORT).show(); // Optionally notify the user
-                    }
-                }
-            }
-        });
-    }
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Rest of your onCreateView code
-        gtClasses.add(new GTClass("Intro to CS", "10:00 AM - 11:15 AM", "Dr. Smith"));
-        gtClasses.add(new GTClass("Calculus", "1:00 PM - 2:15 PM", "Prof. Johnson"));
-
+        // Setup RecyclerView with existing gtClasses
         GTClassAdapter adapter = new GTClassAdapter(gtClasses);
         binding.classesRecyclerView.setAdapter(adapter);
         binding.classesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Set OnClickListener for the Add Class button
+        binding.addClassButton.setOnClickListener(v -> {
+            String classTitle = binding.classTitleEditText.getText().toString();
+            String timeRange = binding.timeRangeEditText.getText().toString();
+            String teacherName = binding.teacherNameEditText.getText().toString();
+
+            // Validate input (simple validation)
+            if (!classTitle.isEmpty() && !timeRange.isEmpty() && !teacherName.isEmpty()) {
+                // Create new GTClass object and add it to the list
+                GTClass newClass = new GTClass(classTitle, timeRange, teacherName);
+                gtClasses.add(newClass);
+                adapter.notifyItemInserted(gtClasses.size() - 1);
+            } else {
+                Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return root;
     }

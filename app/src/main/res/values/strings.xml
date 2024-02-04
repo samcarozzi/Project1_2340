@@ -14,4 +14,7 @@
     <string name="menu_assignmentStore">Assignments</string>
     <string name="menu_examStore">Exams</string>
     <string name="menu_todoStore">Todos</string>
+    <string name="teacherNameHint">Teacher Name</string>
+    <string name="timeRangeResource">Time Range (e.g., 10:00 AM - 11:15 AM)</string>
+    <string name="classTitleSelector">Class Title</string>
 </resources>
