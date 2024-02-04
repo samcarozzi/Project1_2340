@@ -26,9 +26,9 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
     @Override
     public void onBindViewHolder(@NonNull GTClassViewHolder holder, int position) {
         GTClass gtClass = gtClassList.get(position);
-        holder.courseNameTextView.setText(gtClass.getCourseName());
-        holder.timeTextView.setText(gtClass.getTime());
-        holder.instructorTextView.setText(gtClass.getInstructor());
+        holder.courseNameTextView.setText("Class Title: " + gtClass.getCourseName());
+        holder.timeTextView.setText("Time: " + gtClass.getTime());
+        holder.instructorTextView.setText("Instructor: " + gtClass.getInstructor());
     }
 
     @Override
