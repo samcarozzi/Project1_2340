@@ -3,6 +3,7 @@ package com.example.project1.ui.GTClass;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +12,19 @@ import java.util.List;
 
 public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassViewHolder> {
     private List<GTClass> gtClassList;
+    private OnItemDeleteClickListener deleteClickListener;
 
     public GTClassAdapter(List<GTClass> gtClassList) {
         this.gtClassList = gtClassList;
+        //this.deleteClickListener = deleteClickListener;
+    }
+
+    public void setOnItemDeleteClickListener(OnItemDeleteClickListener listener) {
+        this.deleteClickListener = listener;
+    }
+
+    public interface OnItemDeleteClickListener {
+        void onItemDelete(int position);
     }
 
     @NonNull
@@ -29,6 +40,7 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
         holder.courseNameTextView.setText("Class Title: " + gtClass.getCourseName());
         holder.timeTextView.setText("Time: " + gtClass.getTime());
         holder.instructorTextView.setText("Instructor: " + gtClass.getInstructor());
+        holder.deleteButton.setOnClickListener(v -> deleteClickListener.onItemDelete(position));
     }
 
     @Override
@@ -38,12 +50,16 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
 
     static class GTClassViewHolder extends RecyclerView.ViewHolder {
         TextView courseNameTextView, timeTextView, instructorTextView;
+        Button deleteButton;
 
-        public GTClassViewHolder(@NonNull View itemView) {
+        GTClassViewHolder(View itemView) {
             super(itemView);
             courseNameTextView = itemView.findViewById(R.id.courseNameTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
             instructorTextView = itemView.findViewById(R.id.instructorTextView);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
+
+
 }

@@ -25,16 +25,29 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+
     private ArrayList<GTClass> gtClasses = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Setup RecyclerView with existing gtClasses
-        GTClassAdapter adapter = new GTClassAdapter(gtClasses);
+        final GTClassAdapter adapter = new GTClassAdapter(gtClasses);
         binding.classesRecyclerView.setAdapter(adapter);
         binding.classesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Now, set the delete listener using the setter method
+        adapter.setOnItemDeleteClickListener(position -> {
+            gtClasses.remove(position); // Remove the item from the list.
+            adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, gtClasses.size());
+            Toast.makeText(getContext(), "Class removed", Toast.LENGTH_SHORT).show();
+        });
+
+
+        binding.classesRecyclerView.setAdapter(adapter);
+        //binding.classesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         // Set OnClickListener for the Add Class button
         binding.addClassButton.setOnClickListener(v -> {
