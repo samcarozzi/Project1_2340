@@ -1,8 +1,6 @@
-package com.example.project1;
+package com.example.project1.ui.GTExams;
 
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Exams {
     String title;
