@@ -65,6 +65,7 @@
         android:id="@+id/addAssignmentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="Add Assignment"
@@ -89,9 +90,10 @@
         android:id="@+id/sortByDateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="212dp"
         android:layout_marginTop="196dp"
         android:text="Sort by Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,7 +102,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sort by Course"
-        tools:layout_editor_absoluteX="205dp"
-        tools:layout_editor_absoluteY="239dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortByDateButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
