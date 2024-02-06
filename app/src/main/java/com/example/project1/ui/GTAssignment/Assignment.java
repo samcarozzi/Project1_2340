@@ -21,6 +21,16 @@ public class Assignment {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Assignment)) return false;
+        Assignment assignment = (Assignment) o;
+        return title.equals(assignment.title) &&
+                dateDue.equals(assignment.dateDue) &&
+                courseName.equals(assignment.courseName);
+    }
+
     public String getTitle() {
         return title;
     }

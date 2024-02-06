@@ -41,6 +41,17 @@ public class AssignmentFragment extends Fragment {
             Toast.makeText(getContext(), "Assignment removed", Toast.LENGTH_SHORT).show();
         });
 
+        //assignment handling sorting
+        binding.sortByDateButton.setOnClickListener(s -> {
+            Assignment.sortDueDates();
+            adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list
+        });
+
+        binding.sortByCourseButton.setOnClickListener(s -> {
+            Assignment.sortCourseNames();
+            adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list
+        });
+
         // Handle Add Assignment button click
         binding.addAssignmentButton.setOnClickListener(v -> {
             try {
@@ -55,22 +66,16 @@ public class AssignmentFragment extends Fragment {
                 }
 
                 Assignment newAssignment = new Assignment(title, dueDate, courseName);
-                Assignment.assignments.add(newAssignment); // Add new assignment to the list
-                adapter.notifyItemInserted(Assignment.assignments.size() - 1);
+
+                if (!Assignment.assignments.contains(newAssignment)) {
+                    Assignment.assignments.add(newAssignment); // Add if not already in the list
+                    adapter.notifyItemInserted(Assignment.assignments.size() - 1);
+                } else {
+                }
+
             } catch (ParseException e) {
                 Toast.makeText(getContext(), "Invalid date format.", Toast.LENGTH_SHORT).show();
             }
-
-            //assignment handling sorting
-            binding.sortByDateButton.setOnClickListener(s -> {
-                Assignment.sortDueDates();
-                adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list
-            });
-
-            binding.sortByCourseButton.setOnClickListener(s -> {
-                Assignment.sortCourseNames();
-                adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list
-            });
         });
 
         return view;
