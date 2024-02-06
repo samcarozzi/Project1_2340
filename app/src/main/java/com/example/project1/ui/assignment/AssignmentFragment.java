@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.example.project1.databinding.FragmentAssignmentBinding;
 import com.example.project1.ui.GTAssignment.Assignment;
 import com.example.project1.ui.GTAssignment.GTAssignmentsAdapter;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,12 +27,19 @@ public class AssignmentFragment extends Fragment {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Initialize RecyclerView with dummy data
+        // Initialize RecyclerView
         initDummyData();
         GTAssignmentsAdapter adapter = new GTAssignmentsAdapter(Assignment.assignments);
-        RecyclerView recyclerView = binding.assignmentsRecyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        binding.assignmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.assignmentsRecyclerView.setAdapter(adapter);
+
+        // Add delete functionality
+        adapter.setOnItemDeleteClickListener(position -> {
+            Assignment.assignments.remove(position);
+            adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, Assignment.assignments.size());
+            Toast.makeText(getContext(), "Assignment removed", Toast.LENGTH_SHORT).show();
+        });
 
         // Handle Add Assignment button click
         binding.addAssignmentButton.setOnClickListener(v -> {
@@ -51,6 +55,7 @@ public class AssignmentFragment extends Fragment {
                 }
 
                 Assignment newAssignment = new Assignment(title, dueDate, courseName);
+                Assignment.assignments.add(newAssignment); // Add new assignment to the list
                 adapter.notifyItemInserted(Assignment.assignments.size() - 1);
             } catch (ParseException e) {
                 Toast.makeText(getContext(), "Invalid date format.", Toast.LENGTH_SHORT).show();
@@ -61,9 +66,8 @@ public class AssignmentFragment extends Fragment {
     }
 
     private void initDummyData() {
-        Assignment.assignments.clear(); // Clear existing data to avoid duplicates
-        //Assignment.assignments.add(new Assignment("Assignment 1", dateFormat.parse("10/10/2023"), "Course 1"));
-        //Assignment.assignments.add(new Assignment("Assignment 2", dateFormat.parse("11/11/2023"), "Course 2"));
+        // Initialize your dummy data here
+        // Ensure to handle ParseException or set dates directly if fixed
     }
 
     @Override
