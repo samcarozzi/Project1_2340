@@ -66,10 +66,12 @@ public class GTClass {
         return o.courseName.equals(this.courseName);
     }
 
+    /*
     public void removeClass() {
         if (classList.size() == 0) {
             return;
         }
         classList.remove(this);
     }
+    */
 }

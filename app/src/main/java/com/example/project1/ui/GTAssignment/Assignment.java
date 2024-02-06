@@ -54,7 +54,6 @@ public class Assignment {
                 '}';
     }
 
-    //hdfsdf
     public void sortDueDates() {
 
         Collections.sort(assignments, (a1, a2) -> a1.getDateDue().compareTo(a2.getDateDue()));
