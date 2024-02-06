@@ -54,9 +54,13 @@ public class Assignment {
                 '}';
     }
 
-    public void sortDueDates() {
+    public static void sortDueDates() {
 
         Collections.sort(assignments, (a1, a2) -> a1.getDateDue().compareTo(a2.getDateDue()));
+    }
+
+    public static void sortCourseNames() {
+        Collections.sort(assignments, (a1, a2) -> a1.getcourseName().compareToIgnoreCase(a2.getcourseName()));
     }
 
 }

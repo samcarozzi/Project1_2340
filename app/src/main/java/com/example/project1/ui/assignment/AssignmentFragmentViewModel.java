@@ -16,4 +16,6 @@ public class AssignmentFragmentViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
+
 }
