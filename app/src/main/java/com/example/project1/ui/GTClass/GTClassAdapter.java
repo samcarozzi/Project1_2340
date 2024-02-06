@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.project1.R;
+import com.example.project1.ui.GTClass.GTClassAdapter;
+
 import java.util.List;
 
 public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassViewHolder> {
@@ -27,6 +29,16 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
         void onItemDelete(int position);
     }
 
+    private GTClassAdapter.OnItemEditClickListener editClickListener;
+
+    public interface OnItemEditClickListener {
+        void onItemEdit(int position);
+    }
+
+    public void setOnItemEditClickListener(GTClassAdapter.OnItemEditClickListener listener) {
+        this.editClickListener = listener;
+    }
+
     @NonNull
     @Override
     public GTClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,6 +53,12 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
         holder.timeTextView.setText("Time: " + gtClass.getTime());
         holder.instructorTextView.setText("Instructor: " + gtClass.getInstructor());
         holder.deleteButton.setOnClickListener(v -> deleteClickListener.onItemDelete(position));
+
+        holder.classEditButton.setOnClickListener(v -> {
+            if (editClickListener != null) {
+                editClickListener.onItemEdit(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -50,7 +68,7 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
 
     static class GTClassViewHolder extends RecyclerView.ViewHolder {
         TextView courseNameTextView, timeTextView, instructorTextView;
-        Button deleteButton;
+        Button deleteButton, classEditButton;
 
         GTClassViewHolder(View itemView) {
             super(itemView);
@@ -58,6 +76,7 @@ public class GTClassAdapter extends RecyclerView.Adapter<GTClassAdapter.GTClassV
             timeTextView = itemView.findViewById(R.id.timeTextView);
             instructorTextView = itemView.findViewById(R.id.instructorTextView);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            classEditButton = itemView.findViewById(R.id.classEditButton);
         }
     }
 

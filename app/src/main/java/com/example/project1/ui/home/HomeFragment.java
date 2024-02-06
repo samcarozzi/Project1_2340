@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.project1.databinding.FragmentHomeBinding;
+import com.example.project1.ui.GTAssignment.Assignment;
 import com.example.project1.ui.GTClass.GTClass;
 import com.example.project1.ui.GTClass.GTClassAdapter;
 import com.google.android.material.textfield.TextInputLayout;
@@ -42,6 +43,21 @@ public class HomeFragment extends Fragment {
             adapter.notifyItemRemoved(position);
             adapter.notifyItemRangeChanged(position, gtClasses.size());
             Toast.makeText(getContext(), "Class removed", Toast.LENGTH_SHORT).show();
+        });
+
+        adapter.setOnItemEditClickListener(position -> {
+            // Fill the text fields with the selected assignment's details for editing
+            GTClass gtClass = gtClasses.get(position);
+            binding.classTitleEditText.setText(gtClass.getCourseName());
+            binding.timeRangeEditText.setText(gtClass.getTime());
+            binding.teacherNameEditText.setText(gtClass.getInstructor());
+
+            gtClasses.remove(position);
+            adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, gtClasses.size());
+
+            // Change the Add button text to "Update" to indicate editing mode
+
         });
 
 
