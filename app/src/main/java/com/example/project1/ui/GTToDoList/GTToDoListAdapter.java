@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.project1.R;
+import com.example.project1.ui.GTClass.GTClassAdapter;
 import com.example.project1.ui.GTExams.Exams;
 import com.example.project1.ui.GTExams.GTExamsAdapter;
 import com.example.project1.ui.GTToDoList.GTToDoListAdapter;
@@ -24,6 +25,17 @@ public class GTToDoListAdapter extends RecyclerView.Adapter<GTToDoListAdapter.As
 
     public GTToDoListAdapter(List<GTToDoList> assignmentList) {
         this.todoList = assignmentList;
+    }
+
+
+    private GTToDoListAdapter.OnItemEditClickListener editClickListener;
+
+    public interface OnItemEditClickListener {
+        void onItemEdit(int position);
+    }
+
+    public void setOnItemEditClickListener(GTToDoListAdapter.OnItemEditClickListener listener) {
+        this.editClickListener = listener;
     }
 
     @NonNull
@@ -51,6 +63,12 @@ public class GTToDoListAdapter extends RecyclerView.Adapter<GTToDoListAdapter.As
                 deleteClickListener.onItemDelete(holder.getAdapterPosition());
             }
         });
+
+        holder.todoEditButton.setOnClickListener(v -> {
+            if (editClickListener != null) {
+                editClickListener.onItemEdit(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -61,12 +79,13 @@ public class GTToDoListAdapter extends RecyclerView.Adapter<GTToDoListAdapter.As
     static class AssignmentViewHolder extends RecyclerView.ViewHolder {
         TextView todoItemTextView;
 
-        Button todoDeleteButton;
+        Button todoDeleteButton, todoEditButton;
 
         public AssignmentViewHolder(@NonNull View itemView) {
             super(itemView);
             todoItemTextView = itemView.findViewById(R.id.todoItemTextView);
             todoDeleteButton = itemView.findViewById(R.id.todoDeleteButton);
+            todoEditButton = itemView.findViewById(R.id.todoEditButton);
 
         }
     }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.project1.databinding.FragmentTodoBinding;
 import com.example.project1.ui.GTAssignment.Assignment;
+import com.example.project1.ui.GTClass.GTClass;
 import com.example.project1.ui.GTExams.Exams;
 import com.example.project1.ui.GTToDoList.GTToDoList;
 import com.example.project1.ui.GTToDoList.GTToDoListAdapter;
@@ -65,6 +66,21 @@ public class TodoFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "Please fill all fields", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        // set for edit
+
+        adapter.setOnItemEditClickListener(position -> {
+            // Fill the text fields with the selected assignment's details for editing
+            GTToDoList todo = todos.get(position);
+            binding.todoItemEditText.setText(todo.getBody());
+
+            todos.remove(position);
+            adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, todos.size());
+
+            // Change the Add button text to "Update" to indicate editing mode
+
         });
 
         return root;
