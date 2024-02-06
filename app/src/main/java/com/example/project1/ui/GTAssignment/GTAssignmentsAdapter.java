@@ -20,6 +20,9 @@ public class GTAssignmentsAdapter extends RecyclerView.Adapter<GTAssignmentsAdap
     // Use the correct interface within this adapter class
     private OnItemDeleteClickListener deleteClickListener;
 
+
+
+
     public GTAssignmentsAdapter(List<Assignment> assignmentList) {
         this.assignmentList = assignmentList;
     }
@@ -31,6 +34,16 @@ public class GTAssignmentsAdapter extends RecyclerView.Adapter<GTAssignmentsAdap
     // Correctly reference the interface defined within this class
     public interface OnItemDeleteClickListener {
         void onItemDelete(int position);
+    }
+
+    private OnItemEditClickListener editClickListener;
+
+    public interface OnItemEditClickListener {
+        void onItemEdit(int position);
+    }
+
+    public void setOnItemEditClickListener(OnItemEditClickListener listener) {
+        this.editClickListener = listener;
     }
 
     @NonNull
@@ -53,6 +66,12 @@ public class GTAssignmentsAdapter extends RecyclerView.Adapter<GTAssignmentsAdap
                 deleteClickListener.onItemDelete(holder.getAdapterPosition());
             }
         });
+
+        holder.assignmentEditButton.setOnClickListener(v -> {
+            if (editClickListener != null) {
+                editClickListener.onItemEdit(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -64,12 +83,18 @@ public class GTAssignmentsAdapter extends RecyclerView.Adapter<GTAssignmentsAdap
         Button assignmentDeleteButton;
         TextView assignmentTitleTextView, dueDateTextView, courseNameTextView;
 
+        Button assignmentEditButton;
+        // In the AssignmentViewHolder constructor:
+
+
         public AssignmentViewHolder(@NonNull View itemView) {
             super(itemView);
             assignmentTitleTextView = itemView.findViewById(R.id.assignmentTitleTextView);
             dueDateTextView = itemView.findViewById(R.id.dueDateTextView);
             courseNameTextView = itemView.findViewById(R.id.courseNameTextView);
             assignmentDeleteButton = itemView.findViewById(R.id.assignmentDeleteButton);
+            assignmentEditButton = itemView.findViewById(R.id.assignmentEditButton);
+
         }
     }
 }

@@ -22,6 +22,7 @@ public class AssignmentFragment extends Fragment {
     private FragmentAssignmentBinding binding;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false);
@@ -39,6 +40,21 @@ public class AssignmentFragment extends Fragment {
             adapter.notifyItemRemoved(position);
             adapter.notifyItemRangeChanged(position, Assignment.assignments.size());
             Toast.makeText(getContext(), "Assignment removed", Toast.LENGTH_SHORT).show();
+        });
+
+        adapter.setOnItemEditClickListener(position -> {
+            // Fill the text fields with the selected assignment's details for editing
+            Assignment assignment = Assignment.assignments.get(position);
+            binding.assignmentTitleEditText.setText(assignment.getTitle());
+            binding.assignmentDueDateEditText.setText(dateFormat.format(assignment.getDateDue()));
+            binding.assignmentCourseNameEditText.setText(assignment.getcourseName());
+
+            Assignment.assignments.remove(position);
+            adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, Assignment.assignments.size());
+
+            // Change the Add button text to "Update" to indicate editing mode
+
         });
 
         //assignment handling sorting
