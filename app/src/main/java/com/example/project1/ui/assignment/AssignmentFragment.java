@@ -60,6 +60,17 @@ public class AssignmentFragment extends Fragment {
             } catch (ParseException e) {
                 Toast.makeText(getContext(), "Invalid date format.", Toast.LENGTH_SHORT).show();
             }
+
+            //assignment handling sorting
+            binding.sortByDateButton.setOnClickListener(s -> {
+                Assignment.sortDueDates();
+                adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list
+            });
+
+            binding.sortByCourseButton.setOnClickListener(s -> {
+                Assignment.sortCourseNames();
+                adapter.notifyDataSetChanged(); // Notify the adapter to refresh the list
+            });
         });
 
         return view;
